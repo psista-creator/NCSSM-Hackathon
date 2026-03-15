@@ -1,18 +1,64 @@
 import os
-from fish_classifier import detect_fish_from_bytes
+import cv2
 import flet as ft
+from Database import Database, FISH_IMAGE_DIR
+from PIL import Image
+import numpy as np
+import io
 
+import base64
+
+from fish_classifier import detect_fish_from_bytes
+
+
+db = Database()
 
 #-----------SCAN BUTTON AND FISH INFO DISPLAY-----------
 
 #This is where the fish info will be displayed after the image is uploaded and processed. Like we get info from 
 # scanning the fish and then it appends to here to show the text.
+
 fish_info = ft.Column()
 
+def image_to_base64(path):
+    with open(path, "rb") as img_file:
+        img_bytes = img_file.read()
+    encoded = base64.b64encode(img_bytes).decode("utf-8")
+    return f"data:image/jpeg;base64,{encoded}"
+
+def bytes_to_image(image_bytes: bytes) -> np.ndarray:
+    img_pil = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+    img_cv = cv2.cvtColor(np.array(img_pil), cv2.COLOR_RGB2BGR)
+    return img_cv
+
+def load_collection_ui() -> ft.Column:
+    controls = []
+
+    for fish in db.get_collection():
+        img_path = os.path.join(FISH_IMAGE_DIR, fish["filename"])
+        img_src = image_to_base64(img_path)
+        fish_display = ft.Container(
+            ft. Column([
+                ft.Image(src=img_src, width=150, height=150, fit='contain'),
+                ft.Text(f"Species: {fish['label']}", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE),
+                ft.Text(f"Confidence: {fish['confidence']*100:.1f}%", size=13, weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK),
+                ft.Text(f"Habitat: {fish.get('habitat', 'N/A')}", size=13, weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK),
+                ft.Text(f"Region: {fish.get('ocean_region', 'N/A')}", size=13, weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK),
+            ], spacing=5),
+            padding =10,
+            margin = 5,
+            border_radius = 10,
+            bgcolor = ft.Colors.BLUE_100,
+            width = 180,
+        )
+        controls.append(fish_display)
+
+    return ft.Column([ft.Row(controls, wrap=True, alignment=ft.MainAxisAlignment.START),],scroll="auto", expand=True)
 
 async def scan_click(event: ft.ControlEvent):
-    # ft.filepicker() makes the file picker pop up and allows the user to select a file.
+    #is the file picker, lets user choose a file from computer
     file_picker = ft.FilePicker()
+
 
     # calls filepicker, and waits for user to select file before proceeding.
     files = await file_picker.pick_files(with_data=True, allow_multiple=False)
@@ -21,8 +67,22 @@ async def scan_click(event: ft.ControlEvent):
 
     picked = files[0]
 
+    nparr = np.frombuffer(picked.bytes, np.uint8)
+    frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
     # Call the fish detection function and uses the image bytes from picked file as the parameter.
     result = detect_fish_from_bytes(picked.bytes)
+
+    # this'll convert the bytes to a cv2, which the Db can use.
+    frame = bytes_to_image(picked.bytes)
+
+    detection = {
+        "label": result["species"],
+        "confidence": result["confidence"],
+        "bbox": None
+    }
+
+    save_info = db.save_fish(frame, detection, habitat=result["habitat"], ocean_region=result["ocean_region"])
 
     fish_info.controls.clear()
     fish_info.controls.append(
@@ -41,7 +101,7 @@ async def scan_click(event: ft.ControlEvent):
             page.dialog.open = False
             page.dialog = None
             page.update()
-
+    #Idk why this is not working. it should work.
     dialog = ft.AlertDialog(
         title=Popup_header,
         content=ft.Column(
@@ -76,7 +136,7 @@ Popup_header = ft.Row(
         weight=ft.FontWeight.BOLD,
         text_align=ft.TextAlign.CENTER,
     )
-)
+) 
 
 scan_popup = ft.Column(
             controls=[
@@ -103,19 +163,7 @@ scan_page = ft.Container(
     )
 )
 
-collection_page = ft.Container(
-    ft.Column(
-        [
-            ft.Text(
-                "Collection Page",
-                size=25,
-                weight=ft.FontWeight.BOLD,
-                text_align=ft.TextAlign.CENTER,
-                color=ft.Colors.ORANGE,
-            )
-        ]
-    )
-)
+collection_page = ft.Container()
 
 reward_page = ft.Container(
     ft.Column(
@@ -212,7 +260,7 @@ def change_page(event: ft.ControlEvent, content: ft.Container):
     if index == 0:
         content.content = scan_page
     elif index == 1:
-        content.content = collection_page
+        content.content = ft.Container(content=load_collection_ui(), padding=10)
     elif index == 2:
         content.content = reward_page
     elif index == 3:
@@ -226,6 +274,6 @@ def toggle_sidebar(rail: ft.NavigationRail):
         rail.extended = True
     rail.update()
 
-ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+ft.app(target=main, view=ft.AppView.WEB_BROWSER, host="0.0.0.0", port=8550)
 
 # create a pop up kind of box, for when you finish scanning.

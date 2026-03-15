@@ -1,0 +1,246 @@
+{
+  "total_collected": 30,
+  "rewards_earned": 3,
+  "fish": [
+    {
+      "id": "9e99da87",
+      "filename": "fish_9e99da87.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "c6ba280d",
+      "filename": "fish_c6ba280d.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "7148b347",
+      "filename": "fish_7148b347.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "91712907",
+      "filename": "fish_91712907.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "b1293d23",
+      "filename": "fish_b1293d23.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "376de739",
+      "filename": "fish_376de739.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "79ea60b9",
+      "filename": "fish_79ea60b9.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "3be585e7",
+      "filename": "fish_3be585e7.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "095aae64",
+      "filename": "fish_095aae64.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "892d35c6",
+      "filename": "fish_892d35c6.jpg",
+      "label": "Coho",
+      "confidence": 0.93,
+      "habitat": "Rivers, coastal ocean",
+      "ocean_region": "North Pacific"
+    },
+    {
+      "id": "c26bc5b7",
+      "filename": "fish_c26bc5b7.jpg",
+      "label": "unknown",
+      "confidence": 0.591,
+      "habitat": "N/A",
+      "ocean_region": "N/A"
+    },
+    {
+      "id": "e8cdac45",
+      "filename": "fish_e8cdac45.jpg",
+      "label": "Coho",
+      "confidence": 0.93,
+      "habitat": "Rivers, coastal ocean",
+      "ocean_region": "North Pacific"
+    },
+    {
+      "id": "fa60f8ec",
+      "filename": "fish_fa60f8ec.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "a833a014",
+      "filename": "fish_a833a014.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "8fbbda65",
+      "filename": "fish_8fbbda65.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "f72766f4",
+      "filename": "fish_f72766f4.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "8f6d98c5",
+      "filename": "fish_8f6d98c5.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "88cdfc64",
+      "filename": "fish_88cdfc64.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "5684aba0",
+      "filename": "fish_5684aba0.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "f8774a67",
+      "filename": "fish_f8774a67.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "74c9dcc3",
+      "filename": "fish_74c9dcc3.jpg",
+      "label": "Coho",
+      "confidence": 0.93,
+      "habitat": "Rivers, coastal ocean",
+      "ocean_region": "North Pacific"
+    },
+    {
+      "id": "da498d31",
+      "filename": "fish_da498d31.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "9848c23c",
+      "filename": "fish_9848c23c.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "1f0e8503",
+      "filename": "fish_1f0e8503.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "d41c48b6",
+      "filename": "fish_d41c48b6.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "26d96d8c",
+      "filename": "fish_26d96d8c.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "eb49bc0b",
+      "filename": "fish_eb49bc0b.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "53a5acf3",
+      "filename": "fish_53a5acf3.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "3065796f",
+      "filename": "fish_3065796f.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    },
+    {
+      "id": "a2d88a3f",
+      "filename": "fish_a2d88a3f.jpg",
+      "label": "Eel",
+      "confidence": 0.842,
+      "habitat": "Freshwater rivers, coastal sea",
+      "ocean_region": "Europe, North America"
+    }
+  ]
+}

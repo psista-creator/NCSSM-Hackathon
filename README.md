@@ -26,7 +26,7 @@ Alongside this, we offer a potential hardware prototype to assist users in searc
 ## How we built ReefQuest
 Utilizing open source fish identification datasets on kaggle, and public agencies that host large numbers of fish species (NOAA, etc.) We trained a classifier to identify a given species of fish based on an uploaded picture. We created 4 main sources: the database, the rewards system, the AI classifier, and the user interface. We used many different platforms, and we found that Flet was an effective hosting service to run our app on. SQLite helped us develop our backend and database scripts while we used multiple modules to code our frontend strategies. We would take the user’s pictures alongside potential location data to estimate the rarity of the person’s finding. We gauged this as the “proportion of species type expected compared to the amount of marine wildlife in that area”, and we would later give different categories based on the user’s image. 
 
-##Quick CAD Overview
+## Quick CAD Overview
 We developed a Hardware project idea that integrates our fish-detection code. We designed a prototype through CAD of a buoy, which is attached to a tower and has four cameras, which will run and use our fish detection to detect and gather information on fish. After gathering the data, it can be sent to scientists. You can check out the CAD for this model on our GitHub, where everything is stored. 
 
 

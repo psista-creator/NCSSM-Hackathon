@@ -6,7 +6,7 @@ from contextlib import contextmanager
 from datetime import datetime
 from typing import Optional
 
-DB_PATH = "fishquest.db"
+DB_PATH = "ReefQuest.db"
 
 
 class Database:

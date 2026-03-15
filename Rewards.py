@@ -1,6 +1,13 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
+import io
+import base64
+import qrcode
+from qrcode.image.styledpil import StyledPilImage
+from qrcode.image.styles.moduledrawers.pil import RoundedModuleDrawer
+from qrcode.image.styles.colormasks import SolidFillColorMask
+from PIL import Image, ImageDraw, ImageFont
 
 
 SPECIES_BASE_RARITY: dict[str, float] = {
@@ -86,3 +93,51 @@ def _generate_token(user_id: int, reward_id: int) -> str:
     import uuid, hashlib, time
     raw = f"{user_id}-{reward_id}-{time.time()}"
     return hashlib.sha256(raw.encode()).hexdigest()[:32]
+
+REDEMPTION_BASE_URL = "http://localhost:8000/redeem"
+QR_DARK_COLOR  = (15, 82, 130)
+QR_LIGHT_COLOR = (240, 248, 255)
+
+def generate_qr(token: str, reward_title: str) -> str:
+    """Generate a branded QR code. Returns base64-encoded PNG string."""
+    url = f"{REDEMPTION_BASE_URL}/{token}"
+    qr = qrcode.QRCode(
+        version=3,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=10,
+        border=3,
+    )
+    qr.add_data(url)
+    qr.make(fit=True)
+
+    img = qr.make_image(
+        image_factory=StyledPilImage,
+        module_drawer=RoundedModuleDrawer(),
+        color_mask=SolidFillColorMask(
+            front_color=QR_DARK_COLOR,
+            back_color=QR_LIGHT_COLOR,
+        ),
+    ).convert("RGB")
+
+    img = _add_qr_label(img, reward_title)
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return base64.b64encode(buf.getvalue()).decode("utf-8")
+
+
+def _add_qr_label(img: Image.Image, title: str, max_chars: int = 36) -> Image.Image:
+    label = title if len(title) <= max_chars else title[:max_chars - 1] + "…"
+    bar_height = 44
+    new_img = Image.new("RGB", (img.width, img.height + bar_height), QR_DARK_COLOR)
+    new_img.paste(img, (0, 0))
+    draw = ImageDraw.Draw(new_img)
+    try:
+        font = ImageFont.truetype("arial.ttf", 18)
+    except OSError:
+        font = ImageFont.load_default()
+    bbox = draw.textbbox((0, 0), label, font=font)
+    text_w = bbox[2] - bbox[0]
+    x = (new_img.width - text_w) // 2
+    y = img.height + (bar_height - (bbox[3] - bbox[1])) // 2
+    draw.text((x, y), label, fill=(240, 248, 255), font=font)
+    return new_img
